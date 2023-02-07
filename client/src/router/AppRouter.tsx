@@ -1,5 +1,4 @@
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import {
   createBrowserRouter,
   Navigate,
@@ -7,19 +6,24 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import { RouteNames } from './routeNames';
-import Auth from '../pages/Auth';
-import AdminPage from '../pages/Admin';
-import CartPage from '../pages/Cart';
-import Shop from '../pages/Shop';
-import ProductPage from '../pages/ProductPage';
 import { selectUser } from '../store/auth/selectors/selectUser';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { AuthPageAsync } from '../pages/Auth/AuthPage.async';
+import { ProductPageAsync } from '../pages/ProductPage/ProductPage.async';
+import { ShopPageAsync } from '../pages/Shop/ShopPage.async';
+import { AdminPageAsync } from '../pages/Admin/AdminPage.async';
+import { CartPageAsync } from '../pages/Cart/CartPage.async';
+import { Suspense } from 'react';
+import { PageLoader } from '../components/PageLoader';
+import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 
 const AppLayout = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <Suspense fallback={<PageLoader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
@@ -41,28 +45,29 @@ export const AppRouter = () => {
     {
       path: '/',
       element: <AppLayout />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: RouteNames.LOGIN,
-          element: <Auth />,
+          element: <AuthPageAsync />,
         },
         {
           path: RouteNames.REGISTER,
-          element: <Auth />,
+          element: <AuthPageAsync />,
         },
         {
           path: RouteNames.PRODUCT + '/:id',
-          element: <ProductPage />,
+          element: <ProductPageAsync />,
         },
         {
           path: RouteNames.SHOP,
-          element: <Shop />,
+          element: <ShopPageAsync />,
         },
         {
           path: RouteNames.ADMIN,
           element: (
             <LoggedRoute>
-              <AdminPage />
+              <AdminPageAsync />
             </LoggedRoute>
           ),
         },
@@ -70,7 +75,7 @@ export const AppRouter = () => {
           path: RouteNames.CART,
           element: (
             <LoggedRoute>
-              <CartPage />
+              <CartPageAsync />
             </LoggedRoute>
           ),
         },

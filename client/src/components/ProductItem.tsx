@@ -50,9 +50,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
         <CardMedia
           component="img"
           alt="green iguana"
-          height="180"
+          height="250"
           image={process.env.REACT_APP_STATIC_URL + product.img}
-          sx={{ objectFit: 'fill' }}
+          sx={{ objectFit: 'contain' }}
         />
 
         <CardContent

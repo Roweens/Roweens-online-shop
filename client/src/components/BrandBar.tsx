@@ -22,7 +22,7 @@ const BrandBar = () => {
         label={'Все бренды'}
         variant={selectedBrand === null ? 'filled' : 'outlined'}
         onClick={() => handleBrandSelect(null)}
-        color={selectedBrand === null ? 'primary' : 'secondary'}
+        color={selectedBrand === null ? 'primary' : 'primary'}
       />
       {brands.map((brand) => {
         return (
@@ -30,7 +30,7 @@ const BrandBar = () => {
             label={brand.name}
             variant={brand.id === selectedBrand?.id ? 'filled' : 'outlined'}
             onClick={() => handleBrandSelect(brand)}
-            color={brand.id === selectedBrand?.id ? 'primary' : 'secondary'}
+            color={brand.id === selectedBrand?.id ? 'primary' : 'primary'}
             key={brand.id}
           />
         );

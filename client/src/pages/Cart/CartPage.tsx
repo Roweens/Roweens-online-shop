@@ -14,10 +14,10 @@ import {
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { selectCartProducts } from '../store/cart/selectors/selectCartProducts';
-import { cartAPI } from '../services/cartService';
-import { selectUser } from '../store/auth/selectors/selectUser';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { selectCartProducts } from '../../store/cart/selectors/selectCartProducts';
+import { cartAPI } from '../../services/cartService';
+import { selectUser } from '../../store/auth/selectors/selectUser';
 import { useMemo } from 'react';
 
 const CartPage = () => {
@@ -40,7 +40,7 @@ const CartPage = () => {
         elevation={5}
         sx={{
           height: '90%',
-          bgcolor: 'lightGray',
+          bgcolor: 'primary',
           display: 'flex',
           flexDirection: 'column',
         }}

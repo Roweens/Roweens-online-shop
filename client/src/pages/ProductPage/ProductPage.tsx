@@ -12,14 +12,14 @@ import {
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { productAPI } from '../services/productService';
-import { Product } from '../store/products/types/product';
-import { useBrandById } from '../hooks/useBrandById';
-import { ratingAPI } from '../services/ratingService';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { selectUser } from '../store/auth/selectors/selectUser';
-import { RouteNames } from '../router/routeNames';
-import { cartAPI } from '../services/cartService';
+import { productAPI } from '../../services/productService';
+import { Product } from '../../store/products/types/product';
+import { useBrandById } from '../../hooks/useBrandById';
+import { ratingAPI } from '../../services/ratingService';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { selectUser } from '../../store/auth/selectors/selectUser';
+import { RouteNames } from '../../router/routeNames';
+import { cartAPI } from '../../services/cartService';
 
 const ProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
@@ -44,7 +44,7 @@ const ProductPage = () => {
       setRating(data.response.rating);
       console.log(data.isRated);
     }
-  }, [data, isLoading]);
+  }, []);
 
   const handleRating = async (newValue: number | null) => {
     if (!!data?.isRated) return;
@@ -73,7 +73,7 @@ const ProductPage = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ mt: 5 }}>
       <Grid container>
         <Grid item xs={5}>
           <Box

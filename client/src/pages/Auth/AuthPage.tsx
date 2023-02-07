@@ -2,14 +2,14 @@ import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { TextField, Container, Button, Box } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
-import { RouteNames } from '../router/routeNames';
-import { authAPI } from '../services/authService';
+import { RouteNames } from '../../router/routeNames';
+import { authAPI } from '../../services/authService';
 import { useState } from 'react';
 import jwt_decode from 'jwt-decode';
-import { useTypedDispatch } from '../hooks/useTypedDispatch';
-import { setAuth, setUser } from '../store/auth/auth-slice';
-import { cartAPI } from '../services/cartService';
-import { User } from '../store/auth/types/User';
+import { useTypedDispatch } from '../../hooks/useTypedDispatch';
+import { setAuth, setUser } from '../../store/auth/auth-slice';
+import { cartAPI } from '../../services/cartService';
+import { User } from '../../store/auth/types/User';
 
 const Auth = () => {
   const { pathname } = useLocation();

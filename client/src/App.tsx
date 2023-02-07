@@ -14,20 +14,18 @@ import { selectCurrentBrand } from './store/products/selectors/selectCurrentBran
 import { cartAPI } from './services/cartService';
 import { User } from './store/auth/types/User';
 import { useIsLoading } from './hooks/useIsLoading';
-import { darkTheme } from './theme/themes/darkTheme';
-import { lightTheme } from './theme/themes/lightTheme';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeCustomProvider } from './theme/ThemeProvider';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState('light');
+
   const selectedType = useTypedSelector(selectCurrentType);
   const selectedBrand = useTypedSelector(selectCurrentBrand);
   const page = useTypedSelector(selectPage);
 
-  productAPI.useFetchTypesQuery();
   productAPI.useFetchBrandsQuery();
+  productAPI.useFetchTypesQuery();
   productAPI.endpoints.fetchProducts.useQuerySubscription(
     {
       typeId: selectedType ? selectedType.id : undefined,
@@ -39,7 +37,6 @@ function App() {
 
   const [verify] = authAPI.useLazyVerifyQuery();
   const [getCart] = cartAPI.useLazyGetCardQuery();
-
   const dispatch = useTypedDispatch();
   const isLoading = useIsLoading();
 
@@ -52,7 +49,7 @@ function App() {
           localStorage.setItem('token', res.token);
           dispatch(setUser(data));
           dispatch(setAuth(true));
-          getCart({ userId: data.id });
+          getCart({ userId: data?.id });
         })
         .catch(() => {
           localStorage.removeItem('token');
@@ -74,13 +71,10 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={theme === 'dark' ? darkTheme() : lightTheme()}>
+    <ThemeCustomProvider>
       <CssBaseline />
-      <button onClick={(e) => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-        Theme
-      </button>
       <AppRouter />
-    </ThemeProvider>
+    </ThemeCustomProvider>
   );
 }
 

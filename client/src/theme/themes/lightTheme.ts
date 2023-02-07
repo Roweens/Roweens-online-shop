@@ -6,7 +6,7 @@ export function lightTheme() {
     palette: {
       primary: { main: orange[800] },
       secondary: {
-        main: '#000000',
+        main: '#ffffff',
       },
       background: {
         default: '#F5F5F5',

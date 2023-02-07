@@ -10,7 +10,7 @@ export const Pages = () => {
   const totalCount = useTypedSelector(selectTotalCount);
   const dispatch = useTypedDispatch();
   const page = useTypedSelector(selectPage);
-  const limit = 2;
+  const limit = 6;
 
   const pageCount = Math.ceil(totalCount / limit);
 

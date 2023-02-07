@@ -1,7 +1,7 @@
 import { Container, Button } from '@mui/material';
-import CreateBrand from '../components/modals/CreateBrand';
-import CreateProduct from '../components/modals/CreateProduct';
-import CreateType from '../components/modals/CreateType';
+import CreateBrand from '../../components/modals/CreateBrand';
+import CreateProduct from '../../components/modals/CreateProduct';
+import CreateType from '../../components/modals/CreateType';
 import { useState } from 'react';
 
 const AdminPage = () => {

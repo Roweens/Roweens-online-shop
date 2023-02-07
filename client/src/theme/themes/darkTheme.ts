@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { orange, red } from '@mui/material/colors';
+import { orange } from '@mui/material/colors';
 
 export function darkTheme() {
   return createTheme({

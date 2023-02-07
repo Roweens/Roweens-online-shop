@@ -1,8 +1,8 @@
 import { Container, Grid } from '@mui/material';
-import BrandBar from '../components/BrandBar';
-import CatsBar from '../components/CatsBar';
-import { Pages } from '../components/Pages';
-import ProductList from '../components/ProductList';
+import BrandBar from '../../components/BrandBar';
+import CatsBar from '../../components/CatsBar';
+import { Pages } from '../../components/Pages';
+import ProductList from '../../components/ProductList';
 
 const Shop = () => {
   return (

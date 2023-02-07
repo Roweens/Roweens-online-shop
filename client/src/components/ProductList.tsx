@@ -5,7 +5,6 @@ import ProductItem from './ProductItem';
 
 const ProductList = () => {
   const products = useTypedSelector(selectProducts);
-
   return (
     <Grid container spacing={2} sx={{ mt: 5, pl: 4 }}>
       {products?.map((product) => {

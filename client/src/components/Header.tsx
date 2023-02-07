@@ -1,11 +1,11 @@
 import {
   AppBar,
   Box,
-  Button,
   IconButton,
   Toolbar,
   Badge,
   Typography,
+  Chip,
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link as RouterLink } from 'react-router-dom';
@@ -15,11 +15,14 @@ import { RouteNames } from '../router/routeNames';
 import { useTypedDispatch } from '../hooks/useTypedDispatch';
 import { removeUser } from '../store/auth/auth-slice';
 import { selectCart } from '../store/cart/selectors/selectCart';
+import HomeIcon from '@mui/icons-material/Home';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 const Header = () => {
   const user = useTypedSelector(selectUser);
   const cart = useTypedSelector(selectCart);
-
   const dispatch = useTypedDispatch();
 
   const handleLogout = () => {
@@ -32,39 +35,56 @@ const Header = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">Online shop</Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 5 }}>
-            <Button
-              sx={{ color: 'white' }}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              ml: 5,
+              alignItems: 'center',
+            }}
+          >
+            <Chip
+              icon={<HomeIcon />}
+              label="Home"
+              variant="outlined"
               component={RouterLink}
               to={RouteNames.SHOP}
-            >
-              Home
-            </Button>
-            <Button
-              sx={{ color: 'white' }}
+              sx={{ cursor: 'pointer', ml: 2 }}
+              color="secondary"
+            />
+            <Chip
+              icon={<AdminPanelSettingsIcon />}
+              label="Admin panel"
+              variant="outlined"
               component={RouterLink}
               to={RouteNames.ADMIN}
-            >
-              Admin panel
-            </Button>
+              sx={{ cursor: 'pointer', ml: 4, mr: 2 }}
+              color="secondary"
+            />
+            <ThemeSwitcher />
           </Box>
+
           {!user ? (
-            <Button
-              color="inherit"
-              sx={{ mr: 3 }}
+            <Chip
+              icon={<AccountCircleIcon />}
+              label="Login"
+              variant="outlined"
               component={RouterLink}
               to={RouteNames.LOGIN}
-            >
-              Login
-            </Button>
+              color="secondary"
+            />
           ) : (
             <>
               <Typography variant="h6" sx={{ mr: 2 }}>
                 {user?.email}
               </Typography>
-              <Button sx={{ color: 'white', mr: 2 }} onClick={handleLogout}>
-                Logout
-              </Button>
+              <Chip
+                icon={<AccountCircleIcon />}
+                label="Logout"
+                variant="outlined"
+                onClick={handleLogout}
+                color="secondary"
+              />
             </>
           )}
           <IconButton
@@ -74,9 +94,10 @@ const Header = () => {
             aria-label="menu"
             component={RouterLink}
             to={RouteNames.CART}
+            sx={{ ml: 4 }}
           >
             <Badge
-              badgeContent={cart.length}
+              badgeContent={cart?.length}
               color="secondary"
               invisible={!user}
             >
